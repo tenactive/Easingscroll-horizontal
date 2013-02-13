@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>jQuery custom scrollbar demo</title>
+	<style type="text/css">
+		html,body{height:100%;}
+		body {margin:0; padding:0; width: 100%; height: 100%; overflow: hidden; background:#345a75;}
+		a:link,a:visited,a:hover{color:#C30;}
+		.blue{color:#09C;}
+		h1{padding:10px 5px 10px 0; margin:40px 0; color:#fff; font-family:"Yanone Kaffeesatz", Georgia, "Times New Roman", Times, serif; font-size:36px; font-weight:normal; line-height:34px;}
+		h2{font-family:"Lobster",Arial, Helvetica, sans-serif; font-size:22px; font-weight:normal; color:#09C; margin-left:5px;}
+		h3{font-family:"Lobster",Arial, Helvetica, sans-serif; font-size:26px; font-weight:normal; color:#31231E; margin-left:10px;}
+		h4{font-family:"Lobster",Arial, Helvetica, sans-serif; font-size:18px; font-weight:normal; color:#C30; margin:5px 10px;}
+		#background{
+				width:100%;
+				height:100%;
+				min-height:100%;
+				min-width:100%;
+				position: absolute;
+				top: 0;
+				z-index: -1;
+			}
+		
+	</style>
+	<link href="test.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.1.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="jquery.easing.1.3.js"></script>
+	<script type="text/javascript" src="jquery.mousewheel.min.js"></script>
+	<script type="text/javascript">
+		$('#clickme').toggle(function() {
+			$('#hidden').css("height", "+=2000px");
+		});
+	</script>
+	</head>
+
+	<body>
+	<!--<img src="test2.jpg" alt="bg" id="background">-->
+		<!-- content block -->
+		<div id="mcs_container">
+			<div class="customScrollBox">
+				<div class="container">
+					<div class="content">
+						<div id="clickme"></div>
+						<div id="hidden">
+							
+						</div>
+						<div class="contentinner">
+							<h1>Fortrukne</h1>
+							<div class="mid orange">
+								<a href=""></a>
+							</div>
+							<div class="mid wide orange">
+								<a href=""></a>
+							</div>
+							<div class="mid orange">
+								<a href=""></a>
+							</div>
+							<div class="mid purple">
+								<a href=""></a>
+							</div>
+							<div class="mid green">
+								<a href=""></a>
+							</div>
+							<div class="mid big green right">
+								<a href=""></a>
+							</div>
+							<div class="mid wide orange">
+								<a href=""></a>
+							</div>
+						</div>
+						<div class="contentinner">
+							<h1>Værktøjer</h1>
+							<div class="mid orange">
+								<a href=""></a>
+							</div>
+							<div class="mid wide orange">
+								<a href=""></a>
+							</div>
+							<div class="mid orange">
+								<a href=""></a>
+							</div>
+							<div class="mid purple">
+								<a href=""></a>
+							</div>
+							<div class="mid green">
+								<a href=""></a>
+							</div>
+							<div class="mid big green right">
+								<a href=""></a>
+							</div>
+							<div class="mid wide orange">
+								<a href=""></a>
+							</div>
+						</div>
+						<div class="contentinner">
+							<h1>Værktøjer</h1>
+							<div class="mid orange">
+								<a href=""></a>
+							</div>
+							<div class="mid wide orange">
+								<a href=""></a>
+							</div>
+							<div class="mid orange">
+								<a href=""></a>
+							</div>
+							<div class="mid purple">
+								<a href=""></a>
+							</div>
+							<div class="mid green">
+								<a href=""></a>
+							</div>
+							<div class="mid big green right">
+								<a href=""></a>
+							</div>
+							<div class="mid wide orange">
+								<a href=""></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="dragger_container">
+					<div class="dragger" style="display:none;"></div>
+				</div>
+			</div>
+			<a href="#" class="scrollUpBtn"></a> <a href="#" class="scrollDownBtn"></a>
+		</div>
+		<!-- content to show if javascript is disabled -->
+		<noscript>
+			<style type="text/css">
+				#mcs_container .customScrollBox,#mcs2_container .customScrollBox,#mcs3_container .customScrollBox,#mcs4_container .customScrollBox,#mcs5_container .customScrollBox{overflow:auto;}
+				#mcs_container .dragger_container,#mcs2_container .dragger_container,#mcs3_container .dragger_container,#mcs4_container .dragger_container,#mcs5_container .dragger_container{display:none;}
+			</style>
+		</noscript>
+
+		<script>
+		// 
+		// 		Thanks to malihu
+		// 		  Great plugin
+		// 
+		// http://manos.malihu.gr/jquery-custom-content-scroller
+		//
+		$(window).load(function() {
+			mCustomScrollbars();
+		});
+
+		function mCustomScrollbars(){
+			/* 
+			malihu custom scrollbar function parameters: 
+			1) scroll type (values: "vertical" or "horizontal")
+			2) scroll easing amount (0 for no easing) 
+			3) scroll easing type 
+			4) extra bottom scrolling space for vertical scroll type only (minimum value: 1)
+			5) scrollbar height/width adjustment (values: "auto" or "fixed")
+			6) mouse-wheel support (values: "yes" or "no")
+			7) scrolling via buttons support (values: "yes" or "no")
+			8) buttons scrolling speed (values: 1-20, 1 being the slowest)
+			*/
+			$("#mcs_container").mCustomScrollbar("horizontal",1400,"easeOutCirc",0.55,"auto","yes","yes",10); 
+		}
+
+		/* function to fix the -10000 pixel limit of jquery.animate */
+		$.fx.prototype.cur = function(){
+			if ( this.elem[this.prop] != null && (!this.elem.style || this.elem.style[this.prop] == null) ) {
+			  return this.elem[ this.prop ];
+			}
+			var r = parseFloat( jQuery.css( this.elem, this.prop ) );
+			return typeof r == 'undefined' ? 0 : r;
+		}
+		</script>
+		<script src="jquery.mCustomScrollbar.js"></script>
+		
+	</body>
+</html>
